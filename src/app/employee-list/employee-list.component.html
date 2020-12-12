@@ -1,0 +1,87 @@
+<div class="emp-container mat-elevation-z8">
+  <h2>Employee List</h2>
+  <div class="example-loading-shade" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" routerLink="/addEmployee"
+      ><mat-icon>add</mat-icon> Add Employee</a
+    >
+  </div>
+  <div class="mat-elevation-z8">
+    <table
+      mat-table
+      [dataSource]="empolyeeData"
+      class="example-table"
+      matSort
+      matSortActive="name"
+      matSortDisableClear
+      matSortDirection="asc"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>City</th>
+        <td mat-cell *matCellDef="let row">{{ row.address.city }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="editEmployee(element)"
+            style="margin-right: 10px"
+          >
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="deleteEmployee(element.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <!-- <div class="modal-card">
+    <section class="modal-card-body">
+      Are you sure want to delete this employee?
+    </section>
+    <footer class="modal-card-foot">
+      <div class="button is-right">
+        <button (click)="close('yes')" type="button" class="button is-success">
+          Yes
+        </button>
+        <button (click)="close('no')" type="button" class="button is-danger">
+          No
+        </button>
+      </div>
+    </footer>
+  </div> -->
+</div>
